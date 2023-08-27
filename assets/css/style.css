@@ -12,6 +12,10 @@ h2 {
     margin-top: 1em;
 }
 
+body {
+    padding: 1em;
+}
+
 .banner {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
@@ -26,6 +30,7 @@ h2 {
     display: inline-block;
 
 }
+
 .container2 {
     width: 65%;
     display: inline;
@@ -55,10 +60,33 @@ hr {
     background-color: black;
     border: none;
 }
-.box {
-    border-color: green;
-    background-color: blueviolet;
-    border-width: 5px;
-    height:100px;
-    width: 65%;
+
+.todaysWeather {
+    border: solid;
+    margin-top: 20px;
+    padding: 1em;
+    border-width: 1px;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+.dailyWeather {
+    display: flex;
+    flex-wrap: flex;
+    justify-content: space-between;
+    box-sizing: content-box;
+    height: 100px;
+}
+.btn {
+    border-radius: 7px;
+    border-color: black;
+    padding: 3px;
+    background-color: rgb(26, 5, 149);
+    color: white;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 5px;
+    font-size: 20px;
 }
