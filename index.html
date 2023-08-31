@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <!-- <link a href="api.openweathermap.org"/> -->
     <title>Document</title>
 </head>
 
@@ -17,10 +18,7 @@
     <div>
         <h2>Search for City:</h2>
     </div>
-    <form>
-        <input id="cityLoc" name="location" type="text" />
-        <button class="search">SEARCH</button>
-    </form><br>
+
     <hr>
 </main>
 <aside class="container2">
@@ -49,6 +47,10 @@
 <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
     integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
 <script src="./assets/js/script.js"></script>
+<script>
+    dayjs.locale('de') // use locale globally
+    dayjs().locale('de').format() // use locale in a specific instance
+  </script>
 
 <body>
 

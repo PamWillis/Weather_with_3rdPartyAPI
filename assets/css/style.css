@@ -79,14 +79,14 @@ hr {
     height: 100px;
 }
 .btn {
-    border-radius: 7px;
-    border-color: black;
+
     padding: 3px;
-    background-color: rgb(26, 5, 149);
+    background-color: rgb(111, 110, 114);
     color: white;
     font-weight: bold;
     margin-top: 10px;
     margin-bottom: 10px;
     margin-right: 5px;
-    font-size: 20px;
+    font-size: 15px;
+    width: 100%;
 }
