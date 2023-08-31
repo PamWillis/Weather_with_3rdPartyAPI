@@ -48,7 +48,7 @@ $(function () { //wrapped code
     }
 
 
-// var APIKey = "6b4ca00374934fe246239d7d68073141";
+
 
 // example given in email:
 
@@ -79,7 +79,7 @@ fetch(coordinates)
 
 
 //need to swap out coordinates each time there is an entry after running thru example2
-let weather = "http://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid=6b4ca00374934fe246239d7d68073141"
+let weather = "http://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&"
 
 fetch(weather)
 .then(function (responseWe) {
