@@ -27,7 +27,8 @@ $(function () { //wrapped code
             renderSearchHistory();
 
         };
-        console.log("last" + town);
+        theTownLoc();
+        console.log(theTownLoc);
 
         // });
 
@@ -44,7 +45,6 @@ $(function () { //wrapped code
         //add text and style to button
         buttonEl.textContent = JSON.parse(localCity);
         buttonEl.classList.add("btn");
-
     }
 
 
@@ -66,33 +66,44 @@ $(function () { //wrapped code
 
 
     // finds longitude and latidue
-    let coordinates = `http://api.openweathermap.org/geo/1.0/direct?q=${town}&limit=1&appid=6b4ca00374934fe246239d7d68073141`
+    function theTownLoc() {
+        var theTown = localStorage.getItem('myCity');
+        var theLocation = JSON.parse(theTown)
+        console.log("theTownvar" + theTown);
+        let coordinates = `http://api.openweathermap.org/geo/1.0/direct?q=${theLocation}&limit=1&appid=6b4ca00374934fe246239d7d68073141`
 
-    fetch(coordinates)
-        .then(function (responseCoor) {
-            console.log(responseCoor);
-            return responseCoor.json() //getting info and creating object with properties
-        })
-        .then(function (cityCoordinates) {
-            console.log(cityCoordinates)
-        })
-   
+        fetch(coordinates)
+            .then(function (responseCoor) {
+                console.log(responseCoor);
+                return responseCoor.json() //getting info and creating object with properties
+            })
+            .then(function (cityCoordinates) {
+                console.log(cityCoordinates)
+            })
+    }
+    
+    //pull lat and lon from array
+    (cityCoordinates).forEach(lat => {
+        console.log(${cityCoordinates[].lat});
+    });
+
+
 
     //need to swap out coordinates each time there is an entry after running thru example2
     // let lat =
     // let lon =
-    let weather = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=6b4ca00374934fe246239d7d68073141`
+    // let weather = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=6b4ca00374934fe246239d7d68073141`
 
-    fetch(weather)
-        .then(function (responseWe) {
-            console.log(responseWe);
-            return responseWe.json()  //getting info and creating object with properties
+    // fetch(weather)
+    //     .then(function (responseWe) {
+    //         console.log(responseWe);
+    //         return responseWe.json()  //getting info and creating object with properties
 
-        })
-        .then(function (localWeather) {
-            console.log(localWeather)
-        })
+    //     })
+    //     .then(function (localWeather) {
+    //         console.log(localWeather)
+    //     })
 
-    var detailTitle = document.getElementById('currentDate').innerHTML = localCity;
-    console.log(detailTitle);
+    // var detailTitle = document.getElementById('currentDate').innerHTML = localCity;
+    // console.log(detailTitle);
 });
