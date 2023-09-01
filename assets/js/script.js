@@ -93,7 +93,7 @@ $(function () { //wrapped code
                         })
                         .then(function (localWeather) {
                             console.log(localWeather);
-                            localWeather.forEach((object) => {
+                            localWeather.list.forEach((object) => {
                                 if (i = 0, i <= 5, i++) {
                                     let date = object.dt;
                                     // let icon = object.weather[0].icon;
@@ -104,5 +104,6 @@ $(function () { //wrapped code
                             });
                         });
                 });
-            }
-});
+            });
+    }
+})
