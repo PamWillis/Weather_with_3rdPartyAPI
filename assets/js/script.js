@@ -78,32 +78,28 @@ $(function () { //wrapped code
                 return responseCoor.json() //getting info and creating object with properties
             })
             .then(function (cityCoordinates) {
-                console.log(cityCoordinates)
+                //pull lat and lon from array
+                cityCoordinates.forEach(object => {
+                    console.log(object.lat);
+                    console.log(object.lon);
+                   
+                });
+            })
+
+
+
+        //need to swap out coordinates each time there is an entry after running thru example2
+
+        let weather = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=6b4ca00374934fe246239d7d68073141`
+
+        fetch(weather)
+            .then(function (responseWe) {
+                console.log(responseWe);
+                return responseWe.json()  //getting info and creating object with properties
+
+            })
+            .then(function (localWeather) {
+                console.log(localWeather)
             })
     }
-    
-    //pull lat and lon from array
-    (cityCoordinates).forEach(lat => {
-        console.log(${cityCoordinates[].lat});
-    });
-
-
-
-    //need to swap out coordinates each time there is an entry after running thru example2
-    // let lat =
-    // let lon =
-    // let weather = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=6b4ca00374934fe246239d7d68073141`
-
-    // fetch(weather)
-    //     .then(function (responseWe) {
-    //         console.log(responseWe);
-    //         return responseWe.json()  //getting info and creating object with properties
-
-    //     })
-    //     .then(function (localWeather) {
-    //         console.log(localWeather)
-    //     })
-
-    // var detailTitle = document.getElementById('currentDate').innerHTML = localCity;
-    // console.log(detailTitle);
 });
