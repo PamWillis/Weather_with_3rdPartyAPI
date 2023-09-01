@@ -79,27 +79,30 @@ $(function () { //wrapped code
             })
             .then(function (cityCoordinates) {
                 //pull lat and lon from array
-                cityCoordinates.forEach(object => {
+                cityCoordinates.forEach((object) => {
                     console.log(object.lat);
                     console.log(object.lon);
-                   
+                    let lat = object.lat;
+                    let lon = object.lon;
+                    let weather = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=6b4ca00374934fe246239d7d68073141`;
+
+                    fetch(weather)
+                        .then(function (responseWe) {
+                            console.log(responseWe);
+                            return responseWe.json(); //getting info and creating object with properties
+                        })
+                        .then(function (localWeather) {
+                            console.log(localWeather);
+                            localWeather.forEach((object) => {
+                                if (i = 0, i <= 5, i++) {
+                                    let date = object.dt;
+                                    // let icon = object.weather[0].icon;
+                                    // let temp = object.main.temp;
+                                    // let wind = object.wind.gust;
+                                    console.log(date);
+                                };
+                            });
+                        });
                 });
-            })
-
-
-
-        //need to swap out coordinates each time there is an entry after running thru example2
-
-        let weather = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=6b4ca00374934fe246239d7d68073141`
-
-        fetch(weather)
-            .then(function (responseWe) {
-                console.log(responseWe);
-                return responseWe.json()  //getting info and creating object with properties
-
-            })
-            .then(function (localWeather) {
-                console.log(localWeather)
-            })
-    }
+            }
 });
