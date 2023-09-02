@@ -91,7 +91,7 @@ hr {
     width: 100%;
 }
 
-.weatherContainer {
+#weatherContainer {
     display: flex;
     flex-wrap: wrap;
 }

@@ -48,7 +48,7 @@ $(function () { //wrapped code
         buttonEl.textContent = JSON.parse(localCity);
         buttonEl.classList.add("btn");
     }
-
+    weatherContainer = document.getElementbyId('weatherContainer')
     // finds longitude and latidue
     function theTownLoc() {
         var theTown = localStorage.getItem('myCity');
@@ -80,19 +80,23 @@ $(function () { //wrapped code
                             var forecastData = localWeather.list
 
                             for (let i = 0; i < forecastData.length - 1; i += 8) {
-                                var date = forecastData[i].dt;
+                                // var date = forecastData[i].dt;
                                 var icon = forecastData[i].weather[0].icon;
                                 var temp = forecastData[i].main.temp;
                                 var wind = forecastData[i].wind.speed;
                                 var humidity = forecastData[i].main.pressure;
-                                if (i < 41) {
-                                    console.log(date, icon, temp, wind, humidity);
-                                    var divEl = document.createElement("div");
-                                        divEl.textContent = (date, icon, temp, wind, humidity);
-                                        divEl.addEventListener("click", e);
-                                        weatherContainer.appendChild(divEl);
+                                if (i === 0) {
+                                    console.log(icon, temp, wind, humidity);
+                                    var divEl = document.createElement("div"); 
+                                    var date = daysjs(forecastData[i].dt).format(MM/DD/YYYY);
+                                    $('.theDay').text(date);
+                                    
+                                        weatherContainer.append(divEl);
 
                                 }
+                                // else if (i === 7) {
+                       
+                                // }
                             }
 
                         });
