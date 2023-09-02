@@ -93,15 +93,19 @@ $(function () { //wrapped code
                         })
                         .then(function (localWeather) {
                             console.log(localWeather);
-                            localWeather.list.forEach((object) => {
-                                if (i = 0, i <= 5, i++) {
-                                    let date = object.dt;
-                                    // let icon = object.weather[0].icon;
-                                    // let temp = object.main.temp;
-                                    // let wind = object.wind.gust;
-                                    console.log(date);
-                                };
-                            });
+                            var forecastData = localWeather.list
+                            
+                                for (let i = 0; i < forecastData.length - 1; i += 8) {
+                                    var date = forecastData[i].dt;
+                                    var icon = forecastData[i].weather[0].icon;
+                                    var temp = forecastData[i].main.temp;
+                                    var wind = forecastData[i].wind.speed;
+                                    var humidity = forecastData[i].main.pressure;
+                                    if (i < 41) {
+                                        console.log(date, temp, wind, humidity);
+                                    }
+                                }
+
                         });
                 });
             });
