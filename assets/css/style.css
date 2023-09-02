@@ -90,3 +90,21 @@ hr {
     font-size: 15px;
     width: 100%;
 }
+
+.weatherContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    color: white;
+    padding: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 15px;
+    line-height: 30px;
+    margin: 5px;
+    background-color: #0d0de4;
+    height: 200px;
+    width: 150px;
+
+}

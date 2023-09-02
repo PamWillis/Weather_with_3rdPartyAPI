@@ -30,6 +30,8 @@ $(function () { //wrapped code
         theTownLoc();
         console.log(theTownLoc);
 
+
+
         // });
 
         // after location entered find longitude and latitude and store in local storage
@@ -46,24 +48,6 @@ $(function () { //wrapped code
         buttonEl.textContent = JSON.parse(localCity);
         buttonEl.classList.add("btn");
     }
-
-
-
-
-    // example given in email:
-
-    // {"coord":{"lon":-0.1257,"lat":51.5085},"weather":[{"id":803,"main":"Clouds","description":"broken clouds","icon":"04d"}],
-    // "base":"stations","main":{"temp":292.79,"feels_like":292.4,"temp_min":291.54,"temp_max":294.17,"pressure":1012,"humidity":61},
-    // "visibility":10000,"wind":{"speed":3.09,"deg":0},"clouds":{"all":75},"dt":1693228000,"sys":
-    // {"type":2,"id":2075535,"country":"GB","sunrise":1693199174,"sunset":1693249077},
-    // "timezone":3600,"id":2643743,"name":"London","cod":200}
-
-    //call for code for location
-    // http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}
-
-
-    //finds weather related for that longitude and latitude
-
 
     // finds longitude and latidue
     function theTownLoc() {
@@ -94,20 +78,22 @@ $(function () { //wrapped code
                         .then(function (localWeather) {
                             console.log(localWeather);
                             var forecastData = localWeather.list
-                            
-                                for (let i = 0; i < forecastData.length - 1; i += 8) {
-                                    var date = forecastData[i].dt;
-                                    var icon = forecastData[i].weather[0].icon;
-                                    var temp = forecastData[i].main.temp;
-                                    var wind = forecastData[i].wind.speed;
-                                    var humidity = forecastData[i].main.pressure;
-                                    if (i < 41) {
-                                        console.log(date, temp, wind, humidity);
-                                    }
+
+                            for (let i = 0; i < forecastData.length - 1; i += 8) {
+                                var date = forecastData[i].dt;
+                                var icon = forecastData[i].weather[0].icon;
+                                var temp = forecastData[i].main.temp;
+                                var wind = forecastData[i].wind.speed;
+                                var humidity = forecastData[i].main.pressure;
+                                if (i < 41) {
+                                    console.log(date, icon, temp, wind, humidity);
+                                    document.getElementById(day1).innerHTML = date;
                                 }
+                            }
 
                         });
                 });
             });
+        
     }
 })
