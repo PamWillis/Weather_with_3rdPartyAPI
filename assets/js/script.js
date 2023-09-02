@@ -87,7 +87,11 @@ $(function () { //wrapped code
                                 var humidity = forecastData[i].main.pressure;
                                 if (i < 41) {
                                     console.log(date, icon, temp, wind, humidity);
-                                    document.getElementById(day1).innerHTML = date;
+                                    var divEl = document.createElement("div");
+                                        divEl.textContent = (date, icon, temp, wind, humidity);
+                                        divEl.addEventListener("click", e);
+                                        weatherContainer.appendChild(divEl);
+
                                 }
                             }
 
