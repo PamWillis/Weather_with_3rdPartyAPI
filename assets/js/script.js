@@ -78,30 +78,67 @@ $(function () { //wrapped code
                         .then(function (localWeather) {
                             console.log(localWeather);
                             var forecastData = localWeather.list
+                          
 
                             for (let i = 0; i < forecastData.length - 1; i += 8) {
-                                // var date = forecastData[i].dt;
+                                var date = forecastData[i].dt;
                                 var icon = forecastData[i].weather[0].icon;
                                 var temp = forecastData[i].main.temp;
                                 var wind = forecastData[i].wind.speed;
                                 var humidity = forecastData[i].main.pressure;
+                                console.log(date, icon, temp, wind, humidity);
+                                var combineElements = [date, icon, temp, wind, humidity]
+                                console.log(combineElements)
                                 if (i === 0) {
-                                    console.log(icon, temp, wind, humidity);
-                                    var divEl = document.createElement("div"); 
-                                    var date = daysjs(forecastData[i].dt).format(MM/DD/YYYY);
-                                    $('.theDay').text(date);
-                                    
-                                        weatherContainer.append(divEl);
+                                    for (x = 0; x <= combineElements.length; x++) {
+                                        if (x === 0) {
+                                            var divEl = document.createElement("div");  
+                                            var date = dayjs.unix(forecastData[i].dt).format('MM/DD/YYYY');
+                                            $('.theDay').text(date);
+                                            card.appendChild(divEl);
+                                            divEl.className = ("cardType");
+                                        }
+
+                                        // else if (x === 1) {
+                                        //     var divEl = document.createElement("div");
+                                        //     $('.theDay').text(icon);
+                                        //     card.append(divEl);
+                                        // }
+                                        //     // add class icon
+                                        // }
+                                        // else if (x===2) {
+                                        //     var divEl = document.createElement("div");
+                                        //     $('.theDay').text(temp);
+                                        //     card.append(divEl);
+                                        //     // add class temp/convert to fahrenheit(imperial)
+                                        // }
+                                        // else if (x===3) {
+                                        //     var divEl = document.createElement("div");
+                                        //     $('.theDay').text(wind);
+                                        //     card.append(divEl);
+                                        //     // add class wind
+                                        // }
+                                        // else {
+                                        //     var divEl = document.createElement("div");
+                                        //     $('.theDay').text(humidity);
+                                        //     card.append(divEl);
+                                        //     // add class humidity
+                                        // }
+                                    }
+
+
+                                    // document.getElementById("div").textContent = "date";
+
 
                                 }
                                 // else if (i === 7) {
-                       
+
                                 // }
                             }
 
                         });
                 });
             });
-        
+
     }
 })

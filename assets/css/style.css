@@ -96,15 +96,17 @@ hr {
     flex-wrap: wrap;
 }
 
-.card {
-    color: white;
+.cardDes {
     padding: 10px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 15px;
-    line-height: 30px;
     margin: 5px;
     background-color: #0d0de4;
     height: 200px;
     width: 150px;
 
+}
+.cardType {
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 15px;
+    line-height: 30px;
 }
