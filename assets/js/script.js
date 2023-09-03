@@ -91,7 +91,7 @@ $(function () { //wrapped code
 
                                 //Just creating card
                                 if (i < 41) {
-                                  
+
                                     // create a div node
                                     const cardEl = document.createElement("div");
                                     //append the node to the element weather container
@@ -99,32 +99,43 @@ $(function () { //wrapped code
                                     //add class to cardEl
                                     cardEl.classList.add("card");
 
-                                    // create list for card
-                                    //add ul
-                                   const keyList = document.createElement("ul");
-                                   document.getElementsByClassName("card").appendChild(keyList);
-                                   keyList.classList.add("ulList");
-                                   const items = document.createElement("li");
-                                   document.getElementsByClassName("List").appendChild(items);
-                                   List.classList.add("liList");
-                          
+                                    // create ul for card
+                                    const keyList = document.createElement("ul");
+                                    cardEl.appendChild(keyList);
+                                    keyList.classList.add("ulList");
+                                    //create li
+                                    const items = document.createElement("li");
+                                    keyList.appendChild(items);
+                                    items.classList.add("liList");
 
-                                   console.log("created list")
-                                //    keyList.appendChild
 
-                                    // //create text for date
-                                    // const date = dayjs.unix(forecastData[i].dt).format('MM/DD/YYYY');
-                                    // const dateText = document.createTextNode(date);
-                                    // cardEl.appendChild(dateText);
-                                    // cardEl.classList.add("dateTextStyle");
+                                    console.log("created list")
+                                    //    keyList.appendChild
 
-                                    // //create icon
-                                    
+                                    //create text for date
+                                    const date = dayjs.unix(forecastData[i].dt).format('MM/DD/YYYY');
+                                    const dateText = document.createTextNode(date);
+                                    items.push(dateText);
+                                
 
+                                    //create icon
                                    
+                                    items.push(icon);
+
+                                    const tempText = document.createTextNode(temp);
+                                    items.push(tempText);
+
+                                    const windText = document.createTextNode(wind);
+                                    items.push(windText);
+
+                                    const humidityText = document.createTextNode(humidity);
+                                    items.push(humidityText);
+
+
+
 
                                 }
-                              
+
 
 
 

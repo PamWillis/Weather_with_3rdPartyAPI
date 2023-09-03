@@ -97,7 +97,7 @@ hr {
 }
 
 .card {
-    padding: 10px;
+padding 10px;
     margin: 5px;
     background-color: #0d0de4;
     height: 200px;
@@ -114,8 +114,14 @@ hr {
 }
 
 .ulList {
-
+    padding: 10px;
 }
 .liList {
-
+    list-style-type: none;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 15px;
+    line-height: 30px;
 }
