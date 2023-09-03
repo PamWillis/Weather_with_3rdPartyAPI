@@ -48,7 +48,7 @@ $(function () { //wrapped code
         buttonEl.textContent = JSON.parse(localCity);
         buttonEl.classList.add("btn");
     }
-    weatherContainer = document.getElementbyId('weatherContainer')
+
     // finds longitude and latidue
     function theTownLoc() {
         var theTown = localStorage.getItem('myCity');
@@ -78,7 +78,7 @@ $(function () { //wrapped code
                         .then(function (localWeather) {
                             console.log(localWeather);
                             var forecastData = localWeather.list
-                          
+
 
                             for (let i = 0; i < forecastData.length - 1; i += 8) {
                                 var date = forecastData[i].dt;
@@ -86,56 +86,33 @@ $(function () { //wrapped code
                                 var temp = forecastData[i].main.temp;
                                 var wind = forecastData[i].wind.speed;
                                 var humidity = forecastData[i].main.pressure;
-                                var card = document.getElementById("card");
+
                                 console.log(date, icon, temp, wind, humidity);
-                                var combineElements = [date, icon, temp, wind, humidity]
-                                console.log(combineElements)
-                                if (i === 0) {
-                                    for (x = 0; x <= combineElements.length; x++) {
-                                        if (x === 0) {
-                                            
-                                            var divEl = document.createElement("div");  
-                                            var date = dayjs.unix(forecastData[i].dt).format('MM/DD/YYYY');
-                                            $('.theDay').text(date);
-                                            card.appendChild(divEl);
-                                            divEl.classList.add("cardType");
-                                        }
 
-                                        // else if (x === 1) {
-                                        //     var divEl = document.createElement("div");
-                                        //     $('.theDay').text(icon);
-                                        //     card.append(divEl);
-                                        // }
-                                        //     // add class icon
-                                        // }
-                                        // else if (x===2) {
-                                        //     var divEl = document.createElement("div");
-                                        //     $('.theDay').text(temp);
-                                        //     card.append(divEl);
-                                        //     // add class temp/convert to fahrenheit(imperial)
-                                        // }
-                                        // else if (x===3) {
-                                        //     var divEl = document.createElement("div");
-                                        //     $('.theDay').text(wind);
-                                        //     card.append(divEl);
-                                        //     // add class wind
-                                        // }
-                                        // else {
-                                        //     var divEl = document.createElement("div");
-                                        //     $('.theDay').text(humidity);
-                                        //     card.append(divEl);
-                                        //     // add class humidity
-                                        // }
-                                    }
-
-
-                                    // document.getElementById("div").textContent = "date";
-
-
+                                //Just creating card
+                                if (i < 41) {
+                                  
+                                    // create a div node
+                                    const cardEl = document.createElement("div");
+                                    //append the node to the element weather container
+                                    document.getElementById("weatherContainer").appendChild("cardEl");
+                                    //add class to cardEl
+                                    cardEl.classList.add("card");
                                 }
-                                // else if (i === 7) {
+                                else (
+                                    console.log("no more days")
+                                )
 
-                                // }
+
+                                // var dateEl = document.createElement('div');
+                                // cardEl.appendChild(dateEl);
+                                // dateEl.classList.add(cardType)
+                                // var date = dayjs.unix(forecastData[i].dt).format('MM/DD/YYYY');
+                                // $('.theDay').text(date);
+
+
+
+
                             }
 
                         });
