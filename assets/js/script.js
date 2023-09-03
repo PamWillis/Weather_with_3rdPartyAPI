@@ -95,20 +95,36 @@ $(function () { //wrapped code
                                     // create a div node
                                     const cardEl = document.createElement("div");
                                     //append the node to the element weather container
-                                    document.getElementById("weatherContainer").appendChild("cardEl");
+                                    document.getElementById("weatherContainer").appendChild(cardEl);
                                     //add class to cardEl
                                     cardEl.classList.add("card");
+
+                                    // create list for card
+                                    //add ul
+                                   const keyList = document.createElement("ul");
+                                   document.getElementsByClassName("card").appendChild(keyList);
+                                   keyList.classList.add("ulList");
+                                   const items = document.createElement("li");
+                                   document.getElementsByClassName("List").appendChild(items);
+                                   List.classList.add("liList");
+                          
+
+                                   console.log("created list")
+                                //    keyList.appendChild
+
+                                    // //create text for date
+                                    // const date = dayjs.unix(forecastData[i].dt).format('MM/DD/YYYY');
+                                    // const dateText = document.createTextNode(date);
+                                    // cardEl.appendChild(dateText);
+                                    // cardEl.classList.add("dateTextStyle");
+
+                                    // //create icon
+                                    
+
+                                   
+
                                 }
-                                else (
-                                    console.log("no more days")
-                                )
-
-
-                                // var dateEl = document.createElement('div');
-                                // cardEl.appendChild(dateEl);
-                                // dateEl.classList.add(cardType)
-                                // var date = dayjs.unix(forecastData[i].dt).format('MM/DD/YYYY');
-                                // $('.theDay').text(date);
+                              
 
 
 
