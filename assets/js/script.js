@@ -86,17 +86,19 @@ $(function () { //wrapped code
                                 var temp = forecastData[i].main.temp;
                                 var wind = forecastData[i].wind.speed;
                                 var humidity = forecastData[i].main.pressure;
+                                var card = document.getElementById("card");
                                 console.log(date, icon, temp, wind, humidity);
                                 var combineElements = [date, icon, temp, wind, humidity]
                                 console.log(combineElements)
                                 if (i === 0) {
                                     for (x = 0; x <= combineElements.length; x++) {
                                         if (x === 0) {
+                                            
                                             var divEl = document.createElement("div");  
                                             var date = dayjs.unix(forecastData[i].dt).format('MM/DD/YYYY');
                                             $('.theDay').text(date);
                                             card.appendChild(divEl);
-                                            divEl.className = ("cardType");
+                                            divEl.classList.add("cardType");
                                         }
 
                                         // else if (x === 1) {
