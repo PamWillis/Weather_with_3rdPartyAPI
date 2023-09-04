@@ -120,13 +120,10 @@ $(function () { //wrapped code
                                     const iconEl = document.createElement("li");
                                     keyList.appendChild(iconEl);
                                     const iconImage = document.createElement("img");
-                                    iconEl.append(iconImage);
-                                    // const iconImg = document.createElement("img")
-                                    // iconEl.appendChild(iconImg);
-                                    iconDefine = iconEl.setAttributes(icon, iconUrl)
-                                    // iconEl.classList.add("liList");
-                                    iconEl.appendChild(iconDefine);
-
+                                    iconEl.appendChild(iconImage);
+                                    iconImage.setAttribute('src', iconUrl);
+                                    iconEl.classList.add("liList");
+                                   
                                     // //TEMP
                                     const tempEl = document.createElement("li");
                                     keyList.appendChild(tempEl);
