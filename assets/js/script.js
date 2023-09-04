@@ -32,12 +32,6 @@ $(function () { //wrapped code
         theTownLoc();
         console.log(theTownLoc);
 
-
-
-        // });
-
-        // after location entered find longitude and latitude and store in local storage
-
     });
 
     function renderSearchHistory() {
@@ -95,7 +89,6 @@ $(function () { //wrapped code
 
                                 //Just creating card
                                 if (i < 41) {
-
                                     // create a div node
                                     const cardEl = document.createElement("div");
                                     //append the node to the element weather container
@@ -107,8 +100,7 @@ $(function () { //wrapped code
                                     const keyList = document.createElement("ul");
                                     cardEl.appendChild(keyList);
                                     keyList.classList.add("ulList");
-                                    //create li
-
+                                    //DATE
                                     const dateEl = document.createElement("li");
                                     keyList.appendChild(dateEl);
                                     const date = dayjs.unix(forecastData[i].dt).format('MM/DD/YYYY');
@@ -123,12 +115,11 @@ $(function () { //wrapped code
                                     iconEl.appendChild(iconImage);
                                     iconImage.setAttribute('src', iconUrl);
                                     iconEl.classList.add("liList");
-                                   
+
                                     // //TEMP
                                     const tempEl = document.createElement("li");
                                     keyList.appendChild(tempEl);
-                                    // $('tempEl').append("Temp: " + temp + "&deg;" + "F");
-                                    const tempText = document.createTextNode("Temp: " + Math.round(temp) + " F");
+                                    const tempText = document.createTextNode("Temp: " + Math.round(temp) + " °F");
                                     tempEl.classList.add("liList");
                                     tempEl.appendChild(tempText);
                                     //WIND
