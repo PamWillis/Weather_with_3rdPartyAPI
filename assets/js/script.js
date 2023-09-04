@@ -70,7 +70,7 @@ $(function () { //wrapped code
                     console.log(object.lon);
                     let lat = object.lat;
                     let lon = object.lon;
-                    let weather = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=6b4ca00374934fe246239d7d68073141`;
+                    let weather = `http://api.openweathermap.org/data/2.5/forecast?&units=imperial&lat=${lat}&lon=${lon}&appid=6b4ca00374934fe246239d7d68073141`;
 
                     fetch(weather)
                         .then(function (responseWe) {
@@ -86,10 +86,10 @@ $(function () { //wrapped code
                                 var date = forecastData[i].dt;
                                 var icon = forecastData[i].weather[0].icon;
                                 var iconUrl = `https://openweathermap.org/img/wn/${icon}.png`;
-
+                                console.log(iconUrl);
                                 var temp = (forecastData[i].main.temp);
                                 var wind = (forecastData[i].wind.speed);
-                                var humidity = forecastData[i].main.pressure;
+                                var humidity = forecastData[i].main.humidity;
 
                                 console.log(date, icon, temp, wind, humidity);
 
@@ -115,19 +115,23 @@ $(function () { //wrapped code
                                     const dateText = document.createTextNode(date);
                                     dateEl.classList.add("liList");
                                     dateEl.appendChild(dateText);
+
                                     //ICON
                                     const iconEl = document.createElement("li");
                                     keyList.appendChild(iconEl);
+                                    const iconImage = document.createElement("img");
+                                    iconEl.append(iconImage);
                                     // const iconImg = document.createElement("img")
                                     // iconEl.appendChild(iconImg);
-                                    const iconText = document.createTextNode("icon: " + iconUrl);
-                                    iconEl.classList.add("liList");
-                                    iconEl.appendChild(iconText);
+                                    iconDefine = iconEl.setAttributes(icon, iconUrl)
+                                    // iconEl.classList.add("liList");
+                                    iconEl.appendChild(iconDefine);
 
                                     // //TEMP
                                     const tempEl = document.createElement("li");
                                     keyList.appendChild(tempEl);
-                                    const tempText = document.createTextNode("Temp: " + temp);
+                                    // $('tempEl').append("Temp: " + temp + "&deg;" + "F");
+                                    const tempText = document.createTextNode("Temp: " + Math.round(temp) + " F");
                                     tempEl.classList.add("liList");
                                     tempEl.appendChild(tempText);
                                     //WIND
@@ -139,7 +143,7 @@ $(function () { //wrapped code
                                     //HUMIDITY
                                     const humidityEl = document.createElement("li");
                                     keyList.appendChild(humidityEl);
-                                    const humidityText = document.createTextNode("Humidity: " + humidity);
+                                    const humidityText = document.createTextNode("Humidity: " + humidity + "%");
                                     humidityEl.classList.add("liList");
                                     humidityEl.appendChild(humidityText);
 
