@@ -2,7 +2,9 @@
 
 $(function () { //wrapped code
 
-    console.log("hello")
+    // dayjs.extend(window.dayjs-plugin_utc);
+    // dayjs.extend(window.dayjs-plugin_timezone);
+
 
     var today = dayjs();
     var reformatDate = today.format('MMM D, YYYY');
@@ -83,8 +85,10 @@ $(function () { //wrapped code
                             for (let i = 0; i < forecastData.length - 1; i += 8) {
                                 var date = forecastData[i].dt;
                                 var icon = forecastData[i].weather[0].icon;
-                                var temp = forecastData[i].main.temp;
-                                var wind = forecastData[i].wind.speed;
+                                var iconUrl = `https://openweathermap.org/img/wn/${icon}.png`;
+
+                                var temp = (forecastData[i].main.temp);
+                                var wind = (forecastData[i].wind.speed);
                                 var humidity = forecastData[i].main.pressure;
 
                                 console.log(date, icon, temp, wind, humidity);
@@ -104,34 +108,40 @@ $(function () { //wrapped code
                                     cardEl.appendChild(keyList);
                                     keyList.classList.add("ulList");
                                     //create li
-                                    const items = document.createElement("li");
-                                    keyList.appendChild(items);
-                                    items.classList.add("liList");
 
-
-                                    console.log("created list")
-                                    //    keyList.appendChild
-
-                                    //create text for date
+                                    const dateEl = document.createElement("li");
+                                    keyList.appendChild(dateEl);
                                     const date = dayjs.unix(forecastData[i].dt).format('MM/DD/YYYY');
                                     const dateText = document.createTextNode(date);
-                                    items.push(dateText);
-                                
+                                    dateEl.classList.add("liList");
+                                    dateEl.appendChild(dateText);
+                                    //ICON
+                                    const iconEl = document.createElement("li");
+                                    keyList.appendChild(iconEl);
+                                    // const iconImg = document.createElement("img")
+                                    // iconEl.appendChild(iconImg);
+                                    const iconText = document.createTextNode("icon: " + iconUrl);
+                                    iconEl.classList.add("liList");
+                                    iconEl.appendChild(iconText);
 
-                                    //create icon
-                                   
-                                    items.push(icon);
-
-                                    const tempText = document.createTextNode(temp);
-                                    items.push(tempText);
-
-                                    const windText = document.createTextNode(wind);
-                                    items.push(windText);
-
-                                    const humidityText = document.createTextNode(humidity);
-                                    items.push(humidityText);
-
-
+                                    // //TEMP
+                                    const tempEl = document.createElement("li");
+                                    keyList.appendChild(tempEl);
+                                    const tempText = document.createTextNode("Temp: " + temp);
+                                    tempEl.classList.add("liList");
+                                    tempEl.appendChild(tempText);
+                                    //WIND
+                                    const windEl = document.createElement("li");
+                                    keyList.appendChild(windEl);
+                                    const windText = document.createTextNode("Wind: " + wind + " MPH");
+                                    windEl.classList.add("liList");
+                                    windEl.appendChild(windText);
+                                    //HUMIDITY
+                                    const humidityEl = document.createElement("li");
+                                    keyList.appendChild(humidityEl);
+                                    const humidityText = document.createTextNode("Humidity: " + humidity);
+                                    humidityEl.classList.add("liList");
+                                    humidityEl.appendChild(humidityText);
 
 
                                 }
