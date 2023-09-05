@@ -124,3 +124,27 @@ hr {
     font-size: 15px;
     line-height: 30px;
 }
+.HeadListCard1 {
+    display: inline;
+    list-style-type: none;
+    color: black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 30px;
+    line-height: 30px;
+    margin-bottom:  30px;
+}
+.iconCard1 {
+    position: relative;
+bottom: 15px;
+}
+.liListCard1 {
+    list-style-type: none;
+    color: black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 300;
+    letter-spacing: 1px;
+    font-size: 22px;
+    line-height: 30px;
+}

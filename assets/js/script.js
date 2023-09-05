@@ -6,13 +6,13 @@ $(function () { //wrapped code
     // dayjs.extend(window.dayjs-plugin_timezone);
 
 
-    var today = dayjs();
-    var reformatDate = today.format('MMM D, YYYY');
-    $('lead').text(today.format('MMM D, YYYY'));
+    // var today = dayjs();
+    // var reformatDate = today.format('MMM D, YYYY');
+    // $('lead').text(today.format('MMM D, YYYY'));
 
-    $('lead').text(today.format('MMM D, YYYY'));
-    document.getElementById("currentDay").innerHTML = (reformatDate);
-    //console.log(reformatDate)
+    // $('lead').text(today.format('MMM D, YYYY'));
+    // document.getElementById("currentDay").innerHTML = (reformatDate);
+    // //console.log(reformatDate)
 
     // event listener for entering location
     $('.search').on('click', function (e) {
@@ -44,6 +44,17 @@ $(function () { //wrapped code
         //add text and style to button
         buttonEl.textContent = JSON.parse(localCity);
         buttonEl.classList.add("btn");
+       
+        // // second city
+        // if (localCity !== '') {
+        // var mynewCity = {
+        //     localCity: localCity
+        // };
+
+        // localCity.push(mynewCity);
+        // localStorage.setItem('myCity', JSON.stringify(mynewCity));
+        // }
+
     }
 
     // finds longitude and latidue
@@ -100,14 +111,58 @@ $(function () { //wrapped code
                                 var icon = forecastData[i].weather[0].icon;
                                 var iconUrl = `https://openweathermap.org/img/wn/${icon}.png`;
                                 console.log(iconUrl);
-                                var tempMax = (forecastData[i].main.temp_max);
+                                var temp = (forecastData[i].main.temp);
                                 var wind = (forecastData[i].wind.speed);
                                 var humidity = forecastData[i].main.humidity;
 
-                                console.log(date, icon, tempMax, wind, humidity);
+                                console.log(date, icon, temp, wind, humidity);
+
+                                //create current card
+                                if (i < 7) {
+                                    const currentCardEl = document.createElement('div');
+                                    document.getElementById('firstCard').append(currentCardEl);
+                                    currentCardEl.classList.add('todaysWeather');
+
+                                    const currentList = document.createElement("ul");
+                                    currentCardEl.appendChild(currentList);
+                                    //city and date
+                                    const cityDateIcon = document.createElement('li');
+                                    currentList.appendChild(cityDateIcon);
+                                    const date = dayjs.unix(forecastData[i].dt).format('MM/DD/YYYY');
+                                    const dateText = document.createTextNode(theLocation + ' (' + date + ')');
+                                    cityDateIcon.classList.add("HeadListCard1");
+                                    cityDateIcon.appendChild(dateText);
+                                    //icon
+                                    const iconImageSm = document.createElement("img");
+                                    currentList.append(iconImageSm);
+                                    iconImageSm.setAttribute('src', iconUrl);
+                                    cityDateIcon.classList.add("iconCard1");
+
+                                    // //TEMP
+                                    const tempEl = document.createElement("li");
+                                    currentList.appendChild(tempEl);
+                                    const tempText = document.createTextNode("Temp: " + Math.round(temp) + " °F");
+                                    tempEl.classList.add("liListCard1");
+                                    tempEl.appendChild(tempText);
+                                    //WIND
+                                    const windEl = document.createElement("li");
+                                    currentList.appendChild(windEl);
+                                    const windText = document.createTextNode("Wind: " + wind + " MPH");
+                                    windEl.classList.add("liListCard1");
+                                    windEl.appendChild(windText);
+                                    //HUMIDITY
+                                    const humidityEl = document.createElement("li");
+                                    currentList.appendChild(humidityEl);
+                                    const humidityText = document.createTextNode("Humidity: " + humidity + "%");
+                                    humidityEl.classList.add("liListCard1");
+                                    humidityEl.appendChild(humidityText);
+
+
+
+                                }
 
                                 //Just creating card
-                                if (i < 41) {
+                                if (i > 7 && i < 41) {
                                     // create a div node
                                     const cardEl = document.createElement("div");
                                     //append the node to the element weather container
@@ -137,12 +192,12 @@ $(function () { //wrapped code
                                     iconImage.setAttribute('src', iconUrl);
                                     iconEl.classList.add("liList");
 
-                                    // //TEMP max
-                                    const tempMaxEl = document.createElement("li");
-                                    keyList.appendChild(tempMaxEl);
-                                    const tempMaxText = document.createTextNode("Temp: " + Math.round(tempMax) + " °F");
-                                    tempMaxEl.classList.add("liList");
-                                    tempMaxEl.appendChild(tempMaxText);
+                                    // //TEMP
+                                    const tempEl = document.createElement("li");
+                                    keyList.appendChild(tempEl);
+                                    const tempText = document.createTextNode("Temp: " + Math.round(temp) + " °F");
+                                    tempEl.classList.add("liList");
+                                    tempEl.appendChild(tempText);
                                     //WIND
                                     const windEl = document.createElement("li");
                                     keyList.appendChild(windEl);
