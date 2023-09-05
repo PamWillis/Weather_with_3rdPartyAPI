@@ -24,6 +24,7 @@ $(function () { //wrapped code
         var town = document.getElementById('cityLoc').value.trim();
 
         localStorage.setItem("myCity", JSON.stringify(town));
+
         if (town !== '') {
 
             renderSearchHistory();
@@ -49,7 +50,8 @@ $(function () { //wrapped code
     function theTownLoc() {
         var theTown = localStorage.getItem('myCity');
         var theLocation = JSON.parse(theTown)
-        console.log("theTownvar" + theTown);
+        console.log("theTown" + theTown);
+        console.log(theLocation);
         let coordinates = `http://api.openweathermap.org/geo/1.0/direct?q=${theLocation}&limit=1&appid=6b4ca00374934fe246239d7d68073141`
 
         fetch(coordinates)
@@ -62,6 +64,8 @@ $(function () { //wrapped code
                 cityCoordinates.forEach((object) => {
                     console.log(object.lat);
                     console.log(object.lon);
+
+
                     let lat = object.lat;
                     let lon = object.lon;
                     let weather = `http://api.openweathermap.org/data/2.5/forecast?&units=imperial&lat=${lat}&lon=${lon}&appid=6b4ca00374934fe246239d7d68073141`;
@@ -75,17 +79,32 @@ $(function () { //wrapped code
                             console.log(localWeather);
                             var forecastData = localWeather.list
 
+                            //second city
+                            // if (theTown !== '') {
+                            // var mynewCity = {
+                            //     theTown: theTown
+                            // };
+
+                            // theTown.push(mynewCity);
+                            // localStorage.setItem('myCity', JSON.stringify(mynewCity));
+                            // }
+
+
 
                             for (let i = 0; i < forecastData.length - 1; i += 8) {
                                 var date = forecastData[i].dt;
+                                // var startDt =dayjs().add(1, 'day').startOf('day').uix();
+                                // var endDt =dayjs().add(6, 'day').startOf('day').unix();
+
+
                                 var icon = forecastData[i].weather[0].icon;
                                 var iconUrl = `https://openweathermap.org/img/wn/${icon}.png`;
                                 console.log(iconUrl);
-                                var temp = (forecastData[i].main.temp);
+                                var tempMax = (forecastData[i].main.temp_max);
                                 var wind = (forecastData[i].wind.speed);
                                 var humidity = forecastData[i].main.humidity;
 
-                                console.log(date, icon, temp, wind, humidity);
+                                console.log(date, icon, tempMax, wind, humidity);
 
                                 //Just creating card
                                 if (i < 41) {
@@ -101,6 +120,8 @@ $(function () { //wrapped code
                                     cardEl.appendChild(keyList);
                                     keyList.classList.add("ulList");
                                     //DATE
+                                    // var startDt =dayjs().add(1, 'day').startOf('day').uix();
+                                    // var endDt =dayjs().add(6, 'day').startOf('day').unix();
                                     const dateEl = document.createElement("li");
                                     keyList.appendChild(dateEl);
                                     const date = dayjs.unix(forecastData[i].dt).format('MM/DD/YYYY');
@@ -116,12 +137,12 @@ $(function () { //wrapped code
                                     iconImage.setAttribute('src', iconUrl);
                                     iconEl.classList.add("liList");
 
-                                    // //TEMP
-                                    const tempEl = document.createElement("li");
-                                    keyList.appendChild(tempEl);
-                                    const tempText = document.createTextNode("Temp: " + Math.round(temp) + " °F");
-                                    tempEl.classList.add("liList");
-                                    tempEl.appendChild(tempText);
+                                    // //TEMP max
+                                    const tempMaxEl = document.createElement("li");
+                                    keyList.appendChild(tempMaxEl);
+                                    const tempMaxText = document.createTextNode("Temp: " + Math.round(tempMax) + " °F");
+                                    tempMaxEl.classList.add("liList");
+                                    tempMaxEl.appendChild(tempMaxText);
                                     //WIND
                                     const windEl = document.createElement("li");
                                     keyList.appendChild(windEl);
