@@ -100,7 +100,7 @@ function theTownLoc(town) {
                             // console.log(date, icon, temp, wind, humidity);
 
                             //create current card
-                            if (i < 8) {
+                            if (i < 7) {
 
                                 const currentCardEl = document.createElement('div');
                                 document.getElementById('firstCard').append(currentCardEl);
@@ -143,7 +143,7 @@ function theTownLoc(town) {
 
 
                             //Just creating card
-                            if (i => 6) {
+                            // if (i => 6) {
                                 // create a div node
                                 const cardEl = document.createElement("div");
                                 //append the node to the element weather container
