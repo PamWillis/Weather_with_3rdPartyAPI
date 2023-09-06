@@ -87,14 +87,9 @@ function theTownLoc(town) {
                         // console.log(localWeather);
                         var forecastData = localWeather.list
 
-                        //create empty array to be replaced each time new city is entered
-                        // var emptyWeather = [];
+                        for (let i = 0; i < forecastData.length - 1; i + 7) {
 
-                        for (let i = 0; i < forecastData.length - 1; i += 8) {
-                            var date = forecastData[i].dt;
-                         
-
-
+                            // var date = forecastData[i].dt;
                             var icon = forecastData[i].weather[0].icon;
                             var iconUrl = `https://openweathermap.org/img/wn/${icon}.png`;
                             // console.log(iconUrl);
@@ -105,7 +100,7 @@ function theTownLoc(town) {
                             // console.log(date, icon, temp, wind, humidity);
 
                             //create current card
-                            if (i < 7) {
+                            if (i < 8) {
 
                                 const currentCardEl = document.createElement('div');
                                 document.getElementById('firstCard').append(currentCardEl);
@@ -126,7 +121,7 @@ function theTownLoc(town) {
                                 iconImageSm.setAttribute('src', iconUrl);
                                 cityDateIcon.classList.add("iconCard1");
 
-                                // //TEMP
+                                //TEMP
                                 const tempEl = document.createElement("li");
                                 currentList.appendChild(tempEl);
                                 const tempText = document.createTextNode("Temp: " + Math.round(temp) + " °F");
@@ -148,7 +143,7 @@ function theTownLoc(town) {
 
 
                             //Just creating card
-                            if (i > 7 && i < 41) {
+                            if (i => 6) {
                                 // create a div node
                                 const cardEl = document.createElement("div");
                                 //append the node to the element weather container
@@ -196,24 +191,12 @@ function theTownLoc(town) {
                                 const humidityText = document.createTextNode("Humidity: " + humidity + "%");
                                 humidityEl.classList.add("liList");
                                 humidityEl.appendChild(humidityText);
-
-
                             }
-
-
-
-
-
-
                         }
                     });
             });
         });
-
-
 }
-
-
 renderSearchHistory();
 
 
