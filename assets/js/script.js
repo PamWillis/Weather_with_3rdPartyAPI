@@ -87,8 +87,7 @@ function theTownLoc(town) {
                         // console.log(localWeather);
                         var forecastData = localWeather.list
 
-                        for (let i = 0; i < forecastData.length - 1; i + 7) {
-
+                        for (let i = 0; i < forecastData.length - 1; i += 7) {
                             // var date = forecastData[i].dt;
                             var icon = forecastData[i].weather[0].icon;
                             var iconUrl = `https://openweathermap.org/img/wn/${icon}.png`;
@@ -143,7 +142,7 @@ function theTownLoc(town) {
 
 
                             //Just creating card
-                            // if (i => 6) {
+                            if (i > 6) {
                                 // create a div node
                                 const cardEl = document.createElement("div");
                                 //append the node to the element weather container
