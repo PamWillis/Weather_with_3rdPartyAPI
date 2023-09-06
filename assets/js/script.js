@@ -32,7 +32,7 @@ $('.search').on('click', function (e) {
         }
     }
 
-    theTownLoc();
+    theTownLoc(town);
 
 
 
@@ -55,12 +55,12 @@ function renderSearchHistory() {
 }
 
 // finds longitude and latidue
-function theTownLoc() {
+function theTownLoc(town) {
     var theTown = localStorage.getItem('myCity');
     var theLocation = JSON.parse(theTown)
     // console.log("theTown" + theTown);
     // console.log(theLocation);
-    let coordinates = `http://api.openweathermap.org/geo/1.0/direct?q=${theLocation}&limit=1&appid=6b4ca00374934fe246239d7d68073141`
+    let coordinates = `http://api.openweathermap.org/geo/1.0/direct?q=${town}&limit=1&appid=6b4ca00374934fe246239d7d68073141`
 
     fetch(coordinates)
         .then(function (responseCoor) {
@@ -92,8 +92,7 @@ function theTownLoc() {
 
                         for (let i = 0; i < forecastData.length - 1; i += 8) {
                             var date = forecastData[i].dt;
-                            // var startDt =dayjs().add(1, 'day').startOf('day').uix();
-                            // var endDt =dayjs().add(6, 'day').startOf('day').unix();
+                         
 
 
                             var icon = forecastData[i].weather[0].icon;
@@ -118,7 +117,7 @@ function theTownLoc() {
                                 const cityDateIcon = document.createElement('li');
                                 currentList.appendChild(cityDateIcon);
                                 const date = dayjs.unix(forecastData[i].dt).format('MM/DD/YYYY');
-                                const dateText = document.createTextNode(theLocation + ' (' + date + ')');
+                                const dateText = document.createTextNode(town + ' (' + date + ')');
                                 cityDateIcon.classList.add("HeadListCard1");
                                 cityDateIcon.appendChild(dateText);
                                 //icon
@@ -179,7 +178,7 @@ function theTownLoc() {
                                 iconImage.setAttribute('src', iconUrl);
                                 iconEl.classList.add("liList");
 
-                                // //TEMP
+                                //TEMP
                                 const tempEl = document.createElement("li");
                                 keyList.appendChild(tempEl);
                                 const tempText = document.createTextNode("Temp: " + Math.round(temp) + " °F");
