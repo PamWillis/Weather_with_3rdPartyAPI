@@ -21,9 +21,17 @@ $('.search').on('click', function (e) {
     buttonEl.classList.add("btn");
     $('.container').append(buttonEl)
 
-    // if (theTownLoc !== '') {
-    //     theTownLoc.clear()
-    // }
+    if (theTownLoc !== '') {
+        const clearCurrent = document.getElementById("firstCard");
+        while (clearCurrent.lastElementChild) {
+            clearCurrent.removeChild(clearCurrent.lastElementChild);
+        }
+        const clearWeek = document.getElementById("weatherContainer");
+        while (clearWeek.lastElementChild) {
+            clearWeek.removeChild(clearWeek.lastElementChild);
+        }
+    }
+
     theTownLoc();
 
 
@@ -99,6 +107,7 @@ function theTownLoc() {
 
                             //create current card
                             if (i < 7) {
+
                                 const currentCardEl = document.createElement('div');
                                 document.getElementById('firstCard').append(currentCardEl);
                                 currentCardEl.classList.add('todaysWeather');
@@ -136,10 +145,8 @@ function theTownLoc() {
                                 const humidityText = document.createTextNode("Humidity: " + humidity + "%");
                                 humidityEl.classList.add("liListCard1");
                                 humidityEl.appendChild(humidityText);
-
-
-
                             }
+
 
                             //Just creating card
                             if (i > 7 && i < 41) {
@@ -198,16 +205,16 @@ function theTownLoc() {
 
 
 
-                        
-                    }
 
+                        }
                     });
+            });
         });
-});
 
 
 }
 
 
 renderSearchHistory();
+
 
