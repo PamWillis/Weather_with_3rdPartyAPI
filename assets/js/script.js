@@ -77,7 +77,7 @@ function theTownLoc(town) {
 
                 let lat = object.lat;
                 let lon = object.lon;
-                let weather = `http://api.openweathermap.org/data/2.5/forecast?&units=imperial&lat=${lat}&lon=${lon}&appid=${key}`;
+                let weather = `https://api.openweathermap.org/data/2.5/forecast?&units=imperial&lat=${lat}&lon=${lon}&appid=${key}`;
 
                 fetch(weather)
                     .then(function (responseWe) {
