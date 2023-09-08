@@ -60,7 +60,7 @@ function theTownLoc(town) {
     var theLocation = JSON.parse(theTown)
     // console.log("theTown" + theTown);
     // console.log(theLocation);
-    let coordinates = `http://api.openweathermap.org/geo/1.0/direct?q=${town}&limit=1&appid=6b4ca00374934fe246239d7d68073141`
+    let coordinates = `http://api.openweathermap.org/geo/1.0/direct?q=${town}&limit=1&appid=${key}`;
 
     fetch(coordinates)
         .then(function (responseCoor) {
@@ -68,6 +68,7 @@ function theTownLoc(town) {
             return responseCoor.json() //getting info and creating object with properties
         })
         .then(function (cityCoordinates) {
+            console.log(cityCoordinates);
             //pull lat and lon from array
             cityCoordinates.forEach((object) => {
                 // console.log(object.lat);
@@ -76,7 +77,7 @@ function theTownLoc(town) {
 
                 let lat = object.lat;
                 let lon = object.lon;
-                let weather = `http://api.openweathermap.org/data/2.5/forecast?&units=imperial&lat=${lat}&lon=${lon}&appid=6b4ca00374934fe246239d7d68073141`;
+                let weather = `http://api.openweathermap.org/data/2.5/forecast?&units=imperial&lat=${lat}&lon=${lon}&appid=${key}`;
 
                 fetch(weather)
                     .then(function (responseWe) {
@@ -84,10 +85,11 @@ function theTownLoc(town) {
                         return responseWe.json(); //getting info and creating object with properties
                     })
                     .then(function (localWeather) {
-                        // console.log(localWeather);
+                        console.log(localWeather);
                         var forecastData = localWeather.list
 
-                        for (let i = 0; i < forecastData.length - 1; i += 7) {
+                        for (let i = 0; i < forecastData.length-1; i += 8) {
+                            console.log(i);
                             // var date = forecastData[i].dt;
                             var icon = forecastData[i].weather[0].icon;
                             var iconUrl = `https://openweathermap.org/img/wn/${icon}.png`;
@@ -95,8 +97,8 @@ function theTownLoc(town) {
                             var temp = (forecastData[i].main.temp);
                             var wind = (forecastData[i].wind.speed);
                             var humidity = forecastData[i].main.humidity;
-
-                            // console.log(date, icon, temp, wind, humidity);
+                            const hour = dayjs.unix(forecastData[i].dt).format('h');
+                            console.log("the" + hour)
 
                             //create current card
                             if (i < 7) {
