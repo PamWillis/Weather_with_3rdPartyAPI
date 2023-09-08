@@ -60,7 +60,7 @@ function theTownLoc(town) {
     var theLocation = JSON.parse(theTown)
     // console.log("theTown" + theTown);
     // console.log(theLocation);
-    let coordinates = `http://api.openweathermap.org/geo/1.0/direct?q=${town}&limit=1&appid=${key}`;
+    let coordinates = `https://api.openweathermap.org/geo/1.0/direct?q=${town}&limit=1&appid=${key}`;
 
     fetch(coordinates)
         .then(function (responseCoor) {
