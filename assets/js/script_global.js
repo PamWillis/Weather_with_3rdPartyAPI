@@ -1,3 +1,1 @@
-
-
-const key = "6b4ca00374934fe246239d7d68073141";
+const apiKey = "38c6fa3743bbfe1c999752c99ef6a17a"

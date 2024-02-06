@@ -4,49 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Weather App</title>
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <!-- <link a href="api.openweathermap.org"/> -->
-    <title>Document</title>
 </head>
 
-<header>
-    <div class="banner">
-        <h1>Weather Dashboard</h2>
-    </div>
-</header>
-<main class="container">
-    <div>
-        <h2>Search for City:</h2>
-    </div>
-
-    <input id="cityLoc" type="text" name="initial"><br><br>
-    <button class=search>SEARCH</button>
-    <hr>
-</main>
-<aside class="container2">
-    <div id = "firstCard"></div>
-    
-    
-        <h2>5-Day Forcast</h2>
-    
-    <div id="weatherContainer">
-        
-    </div>
-
-</aside>
-
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
-    integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
-<script src="./assets/js/script.js" defer></script>
-<script src="./assets/js/script_global.js" defer></script>
-<script>
-    dayjs.locale('de') // use locale globally
-    dayjs().locale('de').format() // use locale in a specific instance
-</script>
-
 <body>
+    <header>
+        <div class="banner">
+            <h1>Weather Dashboard</h1>
+        </div>
+    </header>
+    <main class="container">
+        <div>
+            <h2>Search for City:</h2>
+        </div>
+        <input id="cityLoc" type="text" name="initial"><br><br>
+        <button class="search">SEARCH</button>
+        <hr>
+    </main>
+    <aside class="container2">
+        <div id="firstCard"></div>
+        <h2>5-Day Forcast</h2>
+        <div id="weatherContainer">
+        </div>
+    </aside>
 
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+        integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
+    <script src="./assets/js/script.js" defer></script>
+    <script src="./assets/js/script_global.js" defer></script>
+    <script>
+        dayjs.locale('de') // use locale globally
+        dayjs().locale('de').format() // use locale in a specific instance
+    </script>
 </body>
 
 </html>

@@ -1,27 +1,16 @@
-
-
-
-
-// dayjs.extend(window.dayjs-plugin_utc);
-// dayjs.extend(window.dayjs-plugin_timezone);
-
-
-// event listener for entering location
+// event listener for entering location and creating card
 $('.search').on('click', function (e) {
-    //     //the time of the div class
-    //added preventDefault
     e.preventDefault();
-    //added console.log to make sure click was working
-    // console.log("im clicked")
     var town = document.getElementById('cityLoc').value.trim();
     emptyArray.push(town);
     localStorage.setItem("myCity", JSON.stringify(emptyArray));
-    var buttonEl = document.createElement("button")
+    var buttonEl = document.createElement("button");
     buttonEl.textContent = town;
     buttonEl.classList.add("btn");
-    $('.container').append(buttonEl)
+    $('.container').append(buttonEl);
 
     if (theTownLoc !== '') {
+        //if loc clear current and create first card, same for week (weatherContainer)
         const clearCurrent = document.getElementById("firstCard");
         while (clearCurrent.lastElementChild) {
             clearCurrent.removeChild(clearCurrent.lastElementChild);
@@ -31,26 +20,23 @@ $('.search').on('click', function (e) {
             clearWeek.removeChild(clearWeek.lastElementChild);
         }
     }
-
-    theTownLoc(town);
-
-
-
+    // Assuming theTownLoc returns a Promise
+    theTownLoc(town)
 });
 
 var emptyArray = [];
 
+//create array of towns
 function renderSearchHistory() {
     var localCity = JSON.parse(localStorage.getItem('myCity'));
 
     console.log("that" + localCity);
 
-    for (i = 0; i < emptyArray.length; i++) {
-        var buttonEl = document.createElement("button")
-        buttonEl.textContent = emptyArray[i];
+    for (i = 0; i < localCity.length; i++) { // Update the loop to use localCity instead of emptyArray
+        var buttonEl = document.createElement("button");
+        buttonEl.textContent = localCity[i];
         buttonEl.classList.add("btn");
-        document.querySelector('.container').append(buttonEl)
-
+        document.querySelector('.container').append(buttonEl);
     }
 }
 
@@ -58,37 +44,31 @@ function renderSearchHistory() {
 function theTownLoc(town) {
     var theTown = localStorage.getItem('myCity');
     var theLocation = JSON.parse(theTown)
-    // console.log("theTown" + theTown);
-    // console.log(theLocation);
-    let coordinates = `https://api.openweathermap.org/geo/1.0/direct?q=${town}&limit=1&appid=${key}`;
+    let coordinates = `https://api.openweathermap.org/geo/1.0/direct?q=${town}&limit=1&appid=${apiKey}`;
 
     fetch(coordinates)
         .then(function (responseCoor) {
-            // console.log(responseCoor);
+            console.log(responseCoor);
             return responseCoor.json() //getting info and creating object with properties
         })
         .then(function (cityCoordinates) {
             console.log(cityCoordinates);
             //pull lat and lon from array
             cityCoordinates.forEach((object) => {
-                // console.log(object.lat);
-                // console.log(object.lon);
-
-
                 let lat = object.lat;
                 let lon = object.lon;
-                let weather = `https://api.openweathermap.org/data/2.5/forecast?&units=imperial&lat=${lat}&lon=${lon}&appid=${key}`;
-
+                let weather = `https://api.openweathermap.org/data/2.5/forecast?&units=imperial&lat=${lat}&lon=${lon}&appid=${apiKey}`;
+                //fetch weather using lat and lon
                 fetch(weather)
                     .then(function (responseWe) {
                         // console.log(responseWe);
                         return responseWe.json(); //getting info and creating object with properties
                     })
                     .then(function (localWeather) {
-                        console.log(localWeather);
+                        // console.log(localWeather);
                         var forecastData = localWeather.list
 
-                        for (let i = 0; i < forecastData.length-1; i += 8) {
+                        for (let i = 0; i < forecastData.length - 1; i += 8) {
                             console.log(i);
                             // var date = forecastData[i].dt;
                             var icon = forecastData[i].weather[0].icon;
@@ -199,5 +179,3 @@ function theTownLoc(town) {
         });
 }
 renderSearchHistory();
-
-
