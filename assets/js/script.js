@@ -68,7 +68,7 @@ function theTownLoc(town) {
                         // console.log(localWeather);
                         var forecastData = localWeather.list
 
-                        for (let i = 0; i < forecastData.length - 1; i += 8) {
+                        for (let i = 0; i < forecastData.length - 1; i += 7) {
                             console.log(i);
                             // var date = forecastData[i].dt;
                             var icon = forecastData[i].weather[0].icon;
