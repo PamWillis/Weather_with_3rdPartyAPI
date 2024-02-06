@@ -10,7 +10,6 @@ The weather app is used to show current weather and the next five days, while us
 User enters city. City is then copied to a button below to disply history. Current weather and date is displayed, along with the next five days. When second city is added page is refreshed while still displaying history and showing the new cities weather.
 
 ![MockUp](./assets/img/Weather_display.png)
-![MockUp](./assets/img/history.png)
 
 ## Deployment and GitHub
 

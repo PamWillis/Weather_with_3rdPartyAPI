@@ -39,6 +39,23 @@ function renderSearchHistory() {
         document.querySelector('.container').append(buttonEl);
     }
 }
+//finding current time
+function getCurrentHourWeather(forecastData) {
+    // Get the current timestamp
+    const currentTimestamp = dayjs().unix();
+
+    // Find the forecast data closest to the current timestamp
+    let currentWeather = null;
+    for (let i = 0; i < forecastData.length; i++) {
+        const timestamp = forecastData[i].dt;
+        if (timestamp >= currentTimestamp) {
+            currentWeather = forecastData[i];
+            break;
+        }
+    }
+
+    return currentWeather;
+}
 
 // finds longitude and latidue
 function theTownLoc(town) {
@@ -68,114 +85,122 @@ function theTownLoc(town) {
                         // console.log(localWeather);
                         var forecastData = localWeather.list
 
-                        for (let i = 1; i < forecastData.length - 1; i += 7) {
-                            console.log(i);
-                            // var date = forecastData[i].dt;
-                            var icon = forecastData[i].weather[0].icon;
-                            var iconUrl = `https://openweathermap.org/img/wn/${icon}.png`;
-                            // console.log(iconUrl);
-                            var temp = (forecastData[i].main.temp);
-                            var wind = (forecastData[i].wind.speed);
-                            var humidity = forecastData[i].main.humidity;
-                            const hour = dayjs.unix(forecastData[i].dt).format('h');
-                            console.log("the" + hour)
+                        const currentHourWeather = getCurrentHourWeather(forecastData);
 
-                            //create current card
-                            if (i < 7) {
+                        // Check if current hour weather data is available
+                        if (currentHourWeather) {
+                            // Extract weather information from current hour weather data
+                            const icon = currentHourWeather.weather[0].icon;
+                            const iconUrl = `https://openweathermap.org/img/wn/${icon}.png`;
+                            const temp = currentHourWeather.main.temp;
+                            const wind = currentHourWeather.wind.speed;
+                            const humidity = currentHourWeather.main.humidity;
 
-                                const currentCardEl = document.createElement('div');
-                                document.getElementById('firstCard').append(currentCardEl);
-                                currentCardEl.classList.add('todaysWeather');
+                            // Create current card
+                            const currentCardEl = document.createElement('div');
+                            document.getElementById('firstCard').append(currentCardEl);
+                            currentCardEl.classList.add('todaysWeather');
 
-                                const currentList = document.createElement("ul");
-                                currentCardEl.appendChild(currentList);
-                                //city and date
-                                const cityDateIcon = document.createElement('li');
-                                currentList.appendChild(cityDateIcon);
-                                const date = dayjs.unix(forecastData[i].dt).format('MM/DD/YYYY');
-                                const dateText = document.createTextNode(town + ' (' + date + ')');
-                                cityDateIcon.classList.add("HeadListCard1");
-                                cityDateIcon.appendChild(dateText);
-                                //icon
-                                const iconImageSm = document.createElement("img");
-                                currentList.append(iconImageSm);
-                                iconImageSm.setAttribute('src', iconUrl);
-                                cityDateIcon.classList.add("iconCard1");
+                            const currentList = document.createElement("ul");
+                            currentCardEl.appendChild(currentList);
 
-                                //TEMP
-                                const tempEl = document.createElement("li");
-                                currentList.appendChild(tempEl);
-                                const tempText = document.createTextNode("Temp: " + Math.round(temp) + " °F");
-                                tempEl.classList.add("liListCard1");
-                                tempEl.appendChild(tempText);
-                                //WIND
-                                const windEl = document.createElement("li");
-                                currentList.appendChild(windEl);
-                                const windText = document.createTextNode("Wind: " + wind + " MPH");
-                                windEl.classList.add("liListCard1");
-                                windEl.appendChild(windText);
-                                //HUMIDITY
-                                const humidityEl = document.createElement("li");
-                                currentList.appendChild(humidityEl);
-                                const humidityText = document.createTextNode("Humidity: " + humidity + "%");
-                                humidityEl.classList.add("liListCard1");
-                                humidityEl.appendChild(humidityText);
-                            }
+                            // City and date
+                            const cityDateIcon = document.createElement('li');
+                            currentList.appendChild(cityDateIcon);
+                            const date = dayjs.unix(currentHourWeather.dt).format('MM/DD/YYYY');
+                            const dateText = document.createTextNode(town + ' (' + date + ')');
+                            cityDateIcon.classList.add("HeadListCard1");
+                            cityDateIcon.appendChild(dateText);
+
+                            // Icon
+                            const iconImageSm = document.createElement("img");
+                            currentList.appendChild(iconImageSm);
+                            iconImageSm.setAttribute('src', iconUrl);
+                            cityDateIcon.classList.add("iconCard1");
+
+                            // TEMP
+                            const tempEl = document.createElement("li");
+                            currentList.appendChild(tempEl);
+                            const tempText = document.createTextNode("Temp: " + Math.round(temp) + " °F");
+                            tempEl.classList.add("liListCard1");
+                            tempEl.appendChild(tempText);
+
+                            // WIND
+                            const windEl = document.createElement("li");
+                            currentList.appendChild(windEl);
+                            const windText = document.createTextNode("Wind: " + wind + " MPH");
+                            windEl.classList.add("liListCard1");
+                            windEl.appendChild(windText);
+
+                            // HUMIDITY
+                            const humidityEl = document.createElement("li");
+                            currentList.appendChild(humidityEl);
+                            const humidityText = document.createTextNode("Humidity: " + humidity + "%");
+                            humidityEl.classList.add("liListCard1");
+                            humidityEl.appendChild(humidityText);
+                        }
 
 
-                            //Just creating card
-                            if (i > 6) {
-                                // create a div node
-                                const cardEl = document.createElement("div");
-                                //append the node to the element weather container
-                                document.getElementById("weatherContainer").appendChild(cardEl);
-                                //add class to cardEl
-                                cardEl.classList.add("card");
+                        // Just creating card
+                        for (let i = 0; i < forecastData.length; i++) {
+                            consolelog(i)
+                            // Create a div node
+                            const cardEl = document.createElement("div");
+                            // Append the node to the element weather container
+                            document.getElementById("weatherContainer").appendChild(cardEl);
+                            // Add class to cardEl
+                            cardEl.classList.add("card");
 
-                                // create ul for card
-                                const keyList = document.createElement("ul");
-                                cardEl.appendChild(keyList);
-                                keyList.classList.add("ulList");
-                                //DATE
-                                // var startDt =dayjs().add(1, 'day').startOf('day').uix();
-                                // var endDt =dayjs().add(6, 'day').startOf('day').unix();
-                                const dateEl = document.createElement("li");
-                                keyList.appendChild(dateEl);
-                                const date = dayjs.unix(forecastData[i].dt).format('MM/DD/YYYY');
-                                const dateText = document.createTextNode(date);
-                                dateEl.classList.add("liList");
-                                dateEl.appendChild(dateText);
+                            // Create ul for card
+                            const keyList = document.createElement("ul");
+                            cardEl.appendChild(keyList);
+                            keyList.classList.add("ulList");
 
-                                //ICON
-                                const iconEl = document.createElement("li");
-                                keyList.appendChild(iconEl);
-                                const iconImage = document.createElement("img");
-                                iconEl.appendChild(iconImage);
-                                iconImage.setAttribute('src', iconUrl);
-                                iconEl.classList.add("liList");
+                            // DATE
+                            const dateEl = document.createElement("li");
+                            keyList.appendChild(dateEl);
+                            const date = dayjs.unix(forecastData[i].dt).format('MM/DD/YYYY');
+                            const dateText = document.createTextNode(date);
+                            dateEl.classList.add("liList");
+                            dateEl.appendChild(dateText);
 
-                                //TEMP
-                                const tempEl = document.createElement("li");
-                                keyList.appendChild(tempEl);
-                                const tempText = document.createTextNode("Temp: " + Math.round(temp) + " °F");
-                                tempEl.classList.add("liList");
-                                tempEl.appendChild(tempText);
-                                //WIND
-                                const windEl = document.createElement("li");
-                                keyList.appendChild(windEl);
-                                const windText = document.createTextNode("Wind: " + wind + " MPH");
-                                windEl.classList.add("liList");
-                                windEl.appendChild(windText);
-                                //HUMIDITY
-                                const humidityEl = document.createElement("li");
-                                keyList.appendChild(humidityEl);
-                                const humidityText = document.createTextNode("Humidity: " + humidity + "%");
-                                humidityEl.classList.add("liList");
-                                humidityEl.appendChild(humidityText);
-                            }
+                            // ICON
+                            const iconEl = document.createElement("li");
+                            keyList.appendChild(iconEl);
+                            const icon = forecastData[i].weather[0].icon;
+                            const iconUrl = `https://openweathermap.org/img/wn/${icon}.png`;
+                            const iconImage = document.createElement("img");
+                            iconEl.appendChild(iconImage);
+                            iconImage.setAttribute('src', iconUrl);
+                            iconEl.classList.add("liList");
+
+                            // TEMP
+                            const tempEl = document.createElement("li");
+                            keyList.appendChild(tempEl);
+                            const temp = forecastData[i].main.temp;
+                            const tempText = document.createTextNode("Temp: " + Math.round(temp) + " °F");
+                            tempEl.classList.add("liList");
+                            tempEl.appendChild(tempText);
+
+                            // WIND
+                            const windEl = document.createElement("li");
+                            keyList.appendChild(windEl);
+                            const wind = forecastData[i].wind.speed;
+                            const windText = document.createTextNode("Wind: " + wind + " MPH");
+                            windEl.classList.add("liList");
+                            windEl.appendChild(windText);
+
+                            // HUMIDITY
+                            const humidityEl = document.createElement("li");
+                            keyList.appendChild(humidityEl);
+                            const humidity = forecastData[i].main.humidity;
+                            const humidityText = document.createTextNode("Humidity: " + humidity + "%");
+                            humidityEl.classList.add("liList");
+                            humidityEl.appendChild(humidityText);
                         }
                     });
             });
         });
 }
+
 renderSearchHistory();
